@@ -1,0 +1,187 @@
+# Скомпилированные / оптимизированные файлы Python, файлы байт-кода
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Файлы расширений на C
+*.so
+
+# Локальные настройки, которые не должны попадать в репозиторий (например, конфиденциальная информация)
+local_settings.py
+
+# Файлы для дистрибуции / сборки пакетов
+.Python  # Используемые для виртуальных окружений Python
+build/  # Каталог сборки проекта
+develop-eggs/  # Используется для управления пакетами
+dist/  # Каталог с дистрибуцией пакетов
+downloads/  # Загрузка временных файлов
+eggs/  # Пакеты и их зависимости
+.eggs/  # Локальные файлы пакетов
+lib/  # Библиотеки проекта
+lib64/  # Библиотеки для 64-битных систем
+parts/
+sdist/  # Источник дистрибутивов
+var/  # Временные переменные файлы
+wheels/  # Колеса (упакованные бинарные файлы)
+share/python-wheels/  # Общие бинарные файлы для пакетов
+*.egg-info/  # Информация о пакетах
+.installed.cfg  # Конфигурационный файл установки пакетов
+*.egg  # Файлы бинарных пакетов
+MANIFEST  # Манифест пакета
+
+# Файлы PyInstaller, используемые для сборки бинарных файлов Python
+*.manifest
+*.spec
+
+# Логи установщика pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Отчеты тестов / покрытия кода
+htmlcov/  # Отчеты покрытия кода в HTML формате
+.tox/  # Тестирование с помощью Tox
+.nox/  # Тестирование с помощью Nox
+.coverage  # Отчеты покрытия кода
+.coverage.*  # Дополнительные файлы покрытия
+.cache  # Кэш файлов
+nosetests.xml  # Результаты тестов Nose
+coverage.xml  # XML отчет покрытия кода
+*.cover  # Вспомогательные файлы покрытия
+*.py,cover  # Отчеты по тестам Python
+.hypothesis/  # Директория с тестовыми данными Hypothesis
+.pytest_cache/  # Кэш данных Pytest
+cover/  # Файлы покрытия
+
+# Файлы переводов (для локализации приложений)
+*.mo  # Компилированные файлы переводов
+*.pot  # Шаблоны переводов
+
+# Специфические файлы Django
+*.log  # Лог-файлы
+db.sqlite3  # База данных SQLite
+db.sqlite3-journal  # Журнал базы данных SQLite
+
+# Специфические файлы Flask
+instance/  # Папка с конфигурациями для Flask
+.webassets-cache  # Кэш статических ресурсов Flask
+
+# Специфические файлы Scrapy (фреймворк для парсинга)
+.scrapy
+
+# Документация Sphinx
+docs/_build/  # Сборка документации
+
+# Файлы PyBuilder (сборщик проектов Python)
+.pybuilder/
+target/  # Целевые файлы сборки
+
+# Jupyter Notebook
+.ipynb_checkpoints  # Контрольные точки для ноутбуков Jupyter
+
+# IPython
+profile_default/  # Профиль по умолчанию для IPython
+ipython_config.py  # Конфигурационный файл IPython
+
+# pyenv - управление версиями Python
+.python-version  # Версия Python для текущего проекта
+
+# pipenv - управление зависимостями и виртуальными окружениями
+Pipfile.lock  # Файл блокировки зависимостей Pipenv
+
+# poetry - управление зависимостями
+poetry.lock  # Файл блокировки зависимостей Poetry
+
+# pdm - управление зависимостями и проектами
+pdm.lock  # Файл блокировки зависимостей PDM
+.pdm.toml  # Конфигурационный файл PDM
+
+# PEP 582; используемые файлы __pypackages__
+__pypackages__/
+
+# Celery - планировщик задач
+celerybeat-schedule  # Расписание задач Celery
+celerybeat.pid  # Идентификатор процесса Celery
+
+# SageMath - файлы математических вычислений
+*.sage.py  # Парсированные файлы SageMath
+
+# Виртуальные окружения
+.env  # Файлы окружений
+.venv
+env/
+venv/
+ENV/
+env.bak/  # Резервные копии окружений
+venv.bak/
+
+# Настройки проекта Spyder
+.spyderproject
+.spyproject
+
+# Настройки проекта Rope
+.ropeproject
+
+# Документация MkDocs
+/site
+
+# Кэш mypy - статический анализатор типов Python
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre - статическая проверка типов
+.pyre/
+
+# pytype - анализатор типов
+.pytype/
+
+# Cython - отладочные символы
+cython_debug/
+
+# PyCharm - настройки среды разработки JetBrains
+.idea/  # Каталог с проектными настройками PyCharm
+
+# pyvenv.cfg - конфигурация виртуального окружения
+pyvenv.cfg
+
+# Ruff - статический анализатор кода
+*.toml
+
+# Сценарии (скрипты проекта)
+Scripts/
+Scripts/add_script.py
+Scripts/add_to_db.py
+
+# Линтеры (анализаторы качества кода)
+.flake8
+
+# Visual Studio Code - редактор кода
+.vscode/*
+!.vscode/settings.json  # Не игнорировать настройки проекта
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History для Visual Studio Code
+.history/
+
+# Построенные расширения для VS Code
+*.vsix
+
+# Файлы проекта (медиа и статические)
+source/files
+source/images
+
+# Игнорировать медиа и статические файлы Django
+staticfiles/  # Собранные статические файлы
+media/  # Загруженные пользователями медиафайлы
+
+# Игнорировать различные файлы разработки и временные файлы
+*.pkl  # Сериализованные объекты Python
+*.swp  # Файлы временного сохранения
+*.swo  # Временные файлы Swap
+*.orig  # Оригинальные файлы до слияния
+*.bak  # Резервные копии
+*.old  # Старые файлы
+*.tmp  # Временные файлы
