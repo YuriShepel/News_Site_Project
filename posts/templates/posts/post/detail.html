@@ -1,0 +1,114 @@
+{% extends 'posts/base.html' %}
+{% load static %}
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.22.1/dist/date-fns.min.js"></script>
+    {% block css %}
+        <link rel="stylesheet" href="{% static "css/post-detail.css" %}">
+        <link rel="stylesheet" href="{% static "css/main.css" %}">
+    {% endblock %}
+    <title> {% block title %}{{ post.title }}{% endblock %}</title>
+</head>
+
+<body>
+<div class="container">
+    <main>
+        {% if tag %}
+            <h2>Posts tagged with "{{ tag.name }}"</h2>
+        {% endif %}
+        {% block content %}
+            <div class="post">
+                <div class="vote">
+                    <div class="vote-section">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M7 14l5-5 5 5z"></path>
+                        </svg>
+                        <span class="vote-count">{{ post.rating }}</span>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M7 10l5 5 5-5z"></path>
+                        </svg>
+                    </div>
+                    <div class="hide-button">
+                        <button class="toggle-content">-</button>
+                    </div>
+
+                </div>
+                <div class="post-content">
+                    <div class="post-title">
+                        {{ post.title }}
+                    </div>
+                    <div class="post-meta">
+                        <a href="#">{{ post.author }}</a> • {{ post.time_since_published }}
+                    </div>
+                    <div class="post-tags">
+                        {% for tag in post.tags.all %}
+                            <a href="{% url "posts:post_list_by_tag" tag.slug %}">
+                                <p class="tag">{{ tag.name }}</p>
+                            </a>
+
+                        {% endfor %}
+                    </div>
+                    <div class="post-text">
+                        <p>{{ post.body }}</p>
+                    </div>
+                    <div class="post-actions">
+                        <div class="comments">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z">
+                                </path>
+                            </svg>
+                            {% with comments.count as total_comments %}
+                                <span>{{ total_comments }}</span>
+                            {% endwith %}
+                        </div>
+                        <div class="views">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z">
+                                </path>
+                            </svg>
+                            <span>7376</span>
+                        </div>
+                        <div class="save">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"></path>
+                            </svg>
+                        </div>
+                        <div class="share">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                        d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comments-section" id="comments">
+                <h2>Комментарии</h2>
+                <div class="dividing-section"></div>
+                {% include "posts/post/includes/comment_form.html" %}
+                {% for comment in comments %}
+                    <div class="comment">
+                        <div class="comment-content">
+                            <div class="comment-meta">
+                                Опубликовано <a href="#">{{ comment.name }}</a> • {{ comment.time_since_published }} • ({{ comment.created_date|date:"d.m.Y в H:i" }})
+                            </div>
+                            <div class="comment-text">
+                                <p>{{ comment.body|linebreaks }}</p>
+                            </div>
+                            <div class="dividing-section"></div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>Комментариев пока нет.</p>
+                {% endfor %}
+
+                <div class="dividing-section"></div>
+            </div>
+        {% endblock %}
+    </main>
+</div>
+<script src="scripts.js">
+</script>
+</body>

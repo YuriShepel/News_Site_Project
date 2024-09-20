@@ -1,0 +1,383 @@
+:root {
+    --primary-color: #FF8C00;
+    --secondary-color: #FFA500;
+    --background-color: #FFF5E6;
+    --text-color: #333;
+    --post-background: white;
+    --separator-color: #ddd;
+    --nav-height: 60px; /* Замените на фактическую высоту вашей навигации */
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    display: grid;
+    height: 100%;
+
+    grid-template-columns: 1fr 1.5fr minmax(0, 0.5fr) 1fr;
+    grid-template-rows: var(--nav-height) auto 1fr 60px;
+    grid-template-areas:
+        "nav nav nav nav"
+        ". main sidebar-top ."
+        ". main sidebar-bottom ."
+        "footer footer footer footer";
+    grid-gap: 0.8rem;
+}
+
+.vote,
+.post,
+.sidebar-top-top,
+.sidebar-top-bottom,
+.sidebar-middle {
+    border-radius: 8px;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    z-index: 1000;
+    grid-area: nav;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 10px black;
+
+}
+
+/* NAVIGATION CSS */
+
+nav .logo {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav p {
+    font-weight: 600;
+    font-size: larger;
+    color: rgb(255, 255, 255);
+}
+
+.nav-center {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-center a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-right svg {
+    fill: white;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+}
+
+
+/* POST CSS */
+
+main {
+    grid-area: main;
+    overflow-y: auto;
+
+}
+
+.post {
+    display: grid;
+    background-color: var(--post-background);
+    grid-template-columns: 0.2fr 2fr;
+    grid-gap: 0.2rem;
+    padding-top: 15px;
+    margin: 10px;
+}
+
+
+.vote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vote-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 0.5px solid #ebc7c7;
+    border-radius: 8px;
+
+}
+
+.vote-btn {
+    border: none; /* Убираем обводку */
+    background: none; /* Убираем фон */
+
+}
+
+
+.vote svg {
+    width: 40px;
+    height: 40px;
+    fill: var(--primary-color);
+    cursor: pointer;
+}
+
+.vote-count {
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.hide-button {
+    border: 0.5px solid #ebc7c7;
+    border-radius: 8px;
+    margin: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+.toggle-content {
+
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 30px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+.hidden-content {
+    display: none;
+}
+
+.hidden-content + .post-actions {
+    margin-top: 30px;
+    /* Например, 20px отступа */
+}
+
+
+.collapsed-content {
+    display: block;
+    /* Чтобы элемент оставался на месте */
+    margin-bottom: 20px;
+    /* Настройте отступ по вашему желанию */
+}
+
+.post-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.post-link {
+    text-decoration: none;
+    color: black;
+    cursor: pointer; /* Меняет курсор на указатель при наведении */
+}
+
+.post-meta {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.post-meta a {
+    color: inherit;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.post-meta a:hover {
+    text-decoration: underline;
+    /* Добавляем подчеркивание при наведении */
+}
+
+.post-tags {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.tag {
+    background-color: var(--secondary-color);
+    color: black;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.post-tags a {
+    text-decoration: none;
+}
+
+.post-text {
+    position: relative;
+    padding-right: 10px;
+    font-size: 16px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    margin-bottom: 20px;
+}
+
+.post-text.expanded {
+    max-height: none;
+}
+
+.gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    pointer-events: none;
+}
+
+.expand-btn {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 15px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.post-text.expanded .gradient-overlay {
+    display: none;
+}
+
+.post-text.expanded .expand-btn {
+    position: static;
+    display: inline-block;
+    margin: 10px 0;
+    transform: none;
+}
+
+
+.post-text p {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+
+}
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    border-top: 0.5px solid #ebc7c7;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 30px;
+}
+
+.comments-link {
+    text-decoration: none; /* Убирает подчеркивание */
+}
+
+.post-actions svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--primary-color);
+    cursor: pointer;
+}
+
+.post-actions .comments,
+.post-actions .views {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* sidebars CSS */
+
+.sidebar-top, .sidebar-bottom {
+    background-color: rgb(250, 250, 250);
+    font-size: 13px;
+    grid-area: sidebar-top;
+    align-self: start;
+    max-width: 100%;
+    overflow-x: hidden;
+    word-wrap: break-word;
+}
+
+.sidebar-bottom {
+    grid-area: sidebar-bottom;
+}
+
+.sidebar-top > * {
+    max-width: 100%;
+}
+
+.footer {
+    background-color: #503bc5;
+    grid-area: footer;
+
+}
+
+@media only screen and (max-width: 550px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 0.4fr) 2.2fr repeat(3, 1.2fr) 1fr;
+        grid-template-areas:
+            "nav"
+            "main"
+            "footer";
+
+
+    }
+}

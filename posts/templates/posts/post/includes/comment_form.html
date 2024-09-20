@@ -1,0 +1,7 @@
+<div class="new-comment">
+    <form action="{% url "posts:post_comment" post.id %}" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Comment</button>
+    </form>
+</div>
