@@ -283,6 +283,10 @@ main {
     margin: 10px;
 }
 
+.comments-section h2 {
+    padding-top: 10px; /* Здесь указываем нужные значения отступов */
+}
+
 .comment-meta {
     margin: 10px;
     font-size: 12px;
