@@ -105,6 +105,24 @@ nav p {
     cursor: pointer;
 }
 
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-input {
+    display: none; /* Скрываем строку поиска по умолчанию */
+    margin-left: 10px; /* Отступ от иконки */
+    padding: 5px;
+}
+
+.search-container.active .search-input {
+    display: block; /* Показываем строку поиска при активации */
+    transition: all 0.3s ease; /* Плавный переход */
+}
+
+
 .avatar {
     width: 42px;
     height: 42px;
