@@ -109,17 +109,20 @@ nav p {
     display: flex;
     align-items: center;
     position: relative;
+
 }
 
 .search-input {
     display: none; /* Скрываем строку поиска по умолчанию */
     margin-left: 10px; /* Отступ от иконки */
     padding: 5px;
+    border-radius: 5px;
+
 }
 
 .search-container.active .search-input {
     display: block; /* Показываем строку поиска при активации */
-    transition: all 0.3s ease; /* Плавный переход */
+    transition: all 0.9s ease; /* Плавный переход */
 }
 
 
