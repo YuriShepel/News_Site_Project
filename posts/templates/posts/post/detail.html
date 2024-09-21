@@ -90,7 +90,7 @@
                 {% include "posts/post/includes/comment_form.html" %}
                 <div id="comments-container">
                     {% for comment in post.comments.all %}
-                        <div class="comment">
+                        <div class="comment" id="comment-{{ comment.id }}">
                             <div class="comment-content">
                                 <div class="comment-meta">
                                     Опубликовано <a href="#">{{ comment.name }}</a> • {{ comment.time_since_published }}
@@ -99,6 +99,9 @@
                                 <div class="comment-text">
                                     <p>{{ comment.body|linebreaks }}</p>
                                 </div>
+                                <button class="reply-button" data-comment-id="{{ comment.id }}"
+                                        data-author="{{ comment.name }}">Ответить
+                                </button>
                                 <div class="dividing-section"></div>
                             </div>
                         </div>
@@ -112,6 +115,7 @@
     </main>
 </div>
 {% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{% static 'scripts/add_comment.js' %}"></script>
 {% endblock %}

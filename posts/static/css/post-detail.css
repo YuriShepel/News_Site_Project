@@ -363,6 +363,47 @@ main {
     cursor: pointer;
 }
 
+#id_body {
+    font-family: Arial, sans-serif;
+}
+
+/* Стили для предпросмотра комментария */
+.comment-preview blockquote {
+    font-style: italic;
+    color: #666;
+    border-left: 2px solid #ccc;
+    padding-left: 10px;
+    margin-left: 0;
+}
+
+.comment-preview strong {
+    font-weight: bold;
+    color: #333;
+}
+
+.comment-text p {
+    margin-bottom: 10px;
+}
+
+.comment-text blockquote {
+    border-left: 2px solid #ccc;
+    padding-left: 10px;
+    margin-left: 0;
+    color: #666;
+}
+
+
+.reply-button {
+    margin: 5px;
+    padding: 3px;
+    color: white;
+    border: none;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+
 .footer {
     background-color: #503bc5;
     grid-area: footer;

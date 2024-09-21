@@ -32,6 +32,7 @@ def post_detail(request, post):
                              status=Post.Status.PUBLISHED)
     comments = post.comments.filter(active=True).order_by('-created_date')
     form = CommentForm()
+
     return render(request,
                   'posts/post/detail.html',
                   {'post': post,
@@ -52,6 +53,7 @@ def post_comment(request, post_id):
 
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({'success': True, 'comment': {
+                'id': comment.id,
                 'name': comment.name,
                 'body': comment.body,
                 'created_date': comment.created_date.strftime("%d.%m.%Y в %H:%M")

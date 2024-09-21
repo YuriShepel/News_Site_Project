@@ -33,8 +33,8 @@ body {
     grid-template-areas:
         "nav nav nav nav"
         ". main sidebar-top ."
-        ". main sidebar-bottom ."
-        "footer footer footer footer";
+        ". main sidebar-bottom .";
+
     grid-gap: 0.8rem;
 }
 
@@ -346,6 +346,7 @@ main {
 /* sidebars CSS */
 
 .sidebar-top, .sidebar-bottom {
+    margin-top: 10px;
     background-color: rgb(250, 250, 250);
     font-size: 13px;
     grid-area: sidebar-top;
@@ -353,6 +354,7 @@ main {
     max-width: 100%;
     overflow-x: hidden;
     word-wrap: break-word;
+
 }
 
 .sidebar-bottom {
