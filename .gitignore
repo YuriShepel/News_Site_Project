@@ -148,7 +148,7 @@ pyvenv.cfg
 *.toml
 
 # Сценарии (скрипты проекта)
-Scripts/
+
 Scripts/add_script.py
 Scripts/add_to_db.py
 
