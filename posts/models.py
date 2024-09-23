@@ -1,8 +1,8 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
-from django.contrib.postgres.indexes import GinIndex
+from django.contrib.auth.models import User, AbstractUser
+
 
 from taggit.managers import TaggableManager
 from .utils import time_since_published, get_short_body
@@ -46,9 +46,7 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_date']
-        indexes = [
-            GinIndex(fields=['title', 'body'])
-        ]
+        indexes = [models.Index(fields=['-published_date'])]
 
     def __str__(self):
         return self.title
@@ -86,7 +84,19 @@ class Comment(models.Model):
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'
 
-
-
     def time_since_published(self):
         return time_since_published(self.created_date)
+
+
+class CustomUser(AbstractUser):
+    date_of_birth = models.DateField(blank=True, null=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    rating = models.IntegerField(default=0)
+    votes_up_count = models.PositiveIntegerField(default=0)
+    votes_down_count = models.PositiveIntegerField(default=0)
+    comments_count = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    last_login = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.username

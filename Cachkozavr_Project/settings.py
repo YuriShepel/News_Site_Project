@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 SITE_ID = 1
 # Application definition
 
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -86,7 +88,7 @@ DATABASES = {
         'PASSWORD': '25633',
     }
 }
-
+AUTH_USER_MODEL = 'posts.CustomUser'
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
