@@ -18,3 +18,7 @@ class CommentForm(forms.ModelForm):
             'body': forms.Textarea(attrs={'class': 'form-control comment-body-input',
                                           'placeholder': 'Напишите, что вы думаете...'}),
         }
+
+
+class SearchForm(forms.Form):
+    query = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control search-input',}))
