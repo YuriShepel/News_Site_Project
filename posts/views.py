@@ -5,8 +5,9 @@ from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.contrib import messages
 from django.urls import reverse
-from django.contrib.postgres.search import SearchVector
-from django.views.generic import ListView
+
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
+
 from taggit.models import Tag
 from .models import Post
 from .forms import CommentForm, SearchForm
@@ -69,37 +70,20 @@ def post_comment(request, post_id):
             return redirect(reverse('posts:post_detail', kwargs={'post': post.slug}))
 
 
-class PostSearchView(ListView):
-    model = Post
-    template_name = 'posts/post/search_results.html'
-    context_object_name = 'posts'
-    paginate_by = 10
-
-    def get_queryset(self):
-        query = self.request.GET.get('query')
-        if query:
-            return Post.published.filter(
-                Q(title__icontains=query) | Q(body__icontains=query)
-            ).distinct()
-        return Post.published.none()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['query'] = self.request.GET.get('query', '')
-        return context
-
-# def post_search(request):
-#     form = SearchForm()
-#     query = None
-#     results = []
-#
-#     if 'query' in request.GET:
-#         form = SearchForm(request.GET)
-#         if form.is_valid():
-#             query = form.cleaned_data['query']
-#             results = Post.published.annotate(search=SearchVector('title', 'body'), ).filter(search=query)
-#     return render(request,
-#                   'posts/post/search.html',
-#                   {'form': form,
-#                    'query': query,
-#                    'results': results})
+def post_search_view(request):
+    query = request.GET.get('query', '')
+    if query:
+        search_query = SearchQuery(query, config='simple')
+        posts = Post.published.annotate(
+            search=SearchVector('title', 'body', config='simple'),
+            rank=SearchRank(SearchVector('title', 'body', config='simple'), search_query)
+        ).filter(
+            Q(search=search_query)
+        ).order_by('-rank')
+    else:
+        posts = Post.published.none()
+    context = {
+        'posts': posts,
+        'query': query,
+    }
+    return render(request, 'posts/post/search_results.html', context)

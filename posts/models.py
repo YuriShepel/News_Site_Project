@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.postgres.indexes import GinIndex
 
 from taggit.managers import TaggableManager
 from .utils import time_since_published, get_short_body
@@ -45,7 +46,9 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_date']
-        indexes = [models.Index(fields=['-published_date'])]
+        indexes = [
+            GinIndex(fields=['title', 'body'])
+        ]
 
     def __str__(self):
         return self.title
