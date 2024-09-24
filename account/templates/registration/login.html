@@ -1,0 +1,73 @@
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <link rel="stylesheet" href="{% static 'css/authentication.css' %}">#}
+{#    <title>Login</title>#}
+{#</head>#}
+{#<body>#}
+{#<div class="container">#}
+{##}
+{#    <a href="{% url 'posts:post_list' %}" class="logo-link">#}
+{#        <div class="logo">#}
+{#            <img src="{% static 'images/logo.png' %}" alt="Logo" width="50" height="50">#}
+{#        </div>#}
+{#        <h1>Welcome to Kachkozavr</h1>#}
+{#    </a>#}
+{#    <div id="formContainer">#}
+{#        <form id="loginForm" method="post">#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_p }} <!-- Динамическое рендеринг полей формы -->#}
+{#            <button type="submit">Log In</button>#}
+{#        </form>#}
+{#    </div>#}
+{#    <div class="switch-form">#}
+{#        <a href="#" id="switchForm">Switch to Registration</a>#}
+{#    </div>#}
+{#</div>#}
+{#</body>#}
+{#</html>#}
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/authentication.css' %}">
+    <link rel="icon" href="{% static "images/favicon.png" %}" type="image/png">
+    <title>Login</title>
+</head>
+<body>
+<div class="container">
+    <a href="{% url 'posts:post_list' %}" class="logo-link">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" width="50" height="50">
+        </div>
+        <h1>Welcome to Kachkozavr</h1>
+    </a>
+
+    {% if form.errors %}
+        <p>Ваше ім'я користувача та пароль не збігаються. Спробуйте ще раз.</p>
+    {% else %}
+        <p></p>
+    {% endif %}
+
+    <div class="login-form">
+        <form action="{% url 'account:login' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ next }}"/>
+            <p><button type="submit">Log-in</button></p>
+        </form>
+    </div>
+
+    <div class="switch-form">
+        {#        <a href="{% url 'registration' %}" id="switchForm">Switch to Registration</a>#}
+    </div>
+</div>
+</body>
+</html>
